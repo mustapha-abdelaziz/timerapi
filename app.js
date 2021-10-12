@@ -6,10 +6,14 @@ const socket = require("socket.io");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+const port = process.env.PORT || 3000;
+
+
 let time = "dsadsdasfqw";
 
 app.use("/", (req, res)=>{
-	res.send("<h1> Hello there</h1>");
+	console.log('app running on: ', port);
+	res.send("<h1>listening to port: </h1>", port);
 });
 
 app.post("/api/setTimer", (req, res) => {
@@ -20,7 +24,6 @@ app.get("/api/gettimer", (req, res) => {
 	res.status(200).send("hello world " + time);
 });
 
-const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
 	console.log("listening to port ", port);
 });
