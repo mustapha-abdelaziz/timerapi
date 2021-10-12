@@ -8,6 +8,10 @@ app.use(express.json());
 
 let time = "dsadsdasfqw";
 
+app.use("/", (req, res)=>{
+	res.send("<h1> Hello there</h1>");
+});
+
 app.post("/api/setTimer", (req, res) => {
 	time = req.body.mediaDuration;
 });
