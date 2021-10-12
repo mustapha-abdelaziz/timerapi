@@ -1,11 +1,10 @@
 const express = require("express");
-const app = express();
 const fs = require("fs");
 const socket = require("socket.io");
 const cors = require('cors')
+const app = express();
 
-
-app.use(cors())
+app.use(cors({origin: 'https://obs-timer-api.herokuapp.com'}))
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
