@@ -12,8 +12,7 @@ const port = process.env.PORT || 3000;
 let time = "dsadsdasfqw";
 
 app.use("/", (req, res)=>{
-	console.log('app running on: ', port);
-	res.send("<h1>listening to port: </h1>", port);
+	res.send("<h1>listening to port: </h1>");
 });
 
 app.post("/api/setTimer", (req, res) => {
