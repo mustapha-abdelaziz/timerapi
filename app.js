@@ -28,7 +28,7 @@ io.on("connection", function (socket) {
 			timer: time,
 			submittedOn: Date.now(),
 		};
-		io.sockets.emit("emited-counter", data);
+		io.sockets.emit("emited-counter", data, Date.now());
 
 		fs.writeFileSync("time.json", JSON.stringify(data));
 	});
