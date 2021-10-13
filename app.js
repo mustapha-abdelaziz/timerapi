@@ -19,9 +19,13 @@ const server = app.listen(port);
 
 const io = socket(server);
 io.on("connection", function (socket) {
+	
+	requestSentAt = socket.handshake.query.connectedAt
 	let rawdata = fs.readFileSync("time.json");
 	let currentTimerTimestamp = JSON.parse(rawdata);
-	io.sockets.emit("server-connection", currentTimerTimestamp);
+
+
+	io.sockets.emit("server-connection", currentTimerTimestamp, requestSentAt , Date.now());
 
 	socket.on("counter", (time) => {
 		io.sockets.emit("emited-counter", time);
@@ -30,6 +34,7 @@ io.on("connection", function (socket) {
 			timer: time,
 			submittedOn: Date.now(),
 		};
+
 		fs.writeFileSync("time.json", JSON.stringify(data));
 	});
 });
