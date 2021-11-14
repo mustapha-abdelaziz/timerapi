@@ -1,10 +1,9 @@
 const express = require("express");
-const fs = require("fs");
-const socket = require("socket.io");
-const cors = require("cors");
 const app = express();
+const fs = require("fs");
+const cors = require("cors");
 
-app.use(cors({ origin: "*" }));
+app.use(cors())
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -15,15 +14,23 @@ app.get("/api/timer", (req, res) => {
 	res.json(obj);
 });
 
+
+
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port);
 
-const io = socket(server);
+const io = require("socket.io")(server, {
+	cors:{
+		origin: '*',
+	}
+});
+
 io.on("connection", function (socket) {
 	requestSentAt = socket.handshake.query.connectedAt;
 
 	socket.on("counter", (time, string) => {
+		
 		data = {
 			timer: time,
 			submittedOn: Date.now(),
